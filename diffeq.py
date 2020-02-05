@@ -53,10 +53,10 @@ class Net(nn.Module):
         self.output = nn.Linear(self.width, 1)
         
     def forward(self, x):
-        x = F.sigmoid(self.input(x))
+        x = F.tanh(self.input(x))
         
         for layer in self.hidden:
-            x = F.sigmoid(layer(x))
+            x = F.tanh(layer(x))
         
         x = self.output(x)
         
@@ -65,7 +65,7 @@ class Net(nn.Module):
 net = Net()
 print(net)
 
-optimizer = optim.Adam(net.parameters(), lr=0.001)
+optimizer = optim.Adam(net.parameters(), lr=1e-4)
 
 n_epoch = 30 # Number of training epochs
 
