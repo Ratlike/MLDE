@@ -1,4 +1,4 @@
-# PyTorch-DE
+# MLDE
 Using PyTorch to solve differential equations.
 
 Inspired by [this paper](https://arxiv.org/abs/1912.04737).
