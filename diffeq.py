@@ -85,8 +85,8 @@ for epoch in range(1, n_epoch + 1):
         diffeq = dxdx + f
         
         # Calculate loss
-        #loss_fn = nn.MSELoss()
-        loss_fn = nn.MSELoss(reduction='none')
+        loss_fn = nn.MSELoss()
+        #loss_fn = nn.MSELoss(reduction='none')
         loss = loss_fn(diffeq, torch.zeros_like(diffeq))
         
         # Boundary conditions
@@ -100,9 +100,9 @@ for epoch in range(1, n_epoch + 1):
         bc2_loss = loss_fn(bc2, torch.Tensor([1]))
         
         # Combine loss functions
-        #loss = loss + bc1_loss + bc2_loss
-        loss = torch.cat((loss, bc1_loss.view(-1, 1), bc2_loss.view(-1, 1)), 0)
-        loss = torch.mean(loss)
+        loss = loss + (bc1_loss + bc2_loss)/2
+        #loss = torch.cat((loss, bc1_loss.view(-1, 1), bc2_loss.view(-1, 1)), 0)
+        #loss = torch.mean(loss)
         
         # Backpropagation
         loss.backward()
